@@ -1,0 +1,20 @@
+{
+  "name": "udesc-testes-de-software-trabalho-1",
+  "version": "1.0.0",
+  "description": "Testes de sistema sobre a ferramenta automationexercise",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": "v20.12.1"
+  },
+  "scripts": {
+    "cypress:web": "npx cypress open --browser chromium",
+    "cypress:headless": "npx cypress run --browser chromium"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.7.2"
+  }
+}

@@ -8,8 +8,8 @@
     "node": "v20.12.1"
   },
   "scripts": {
-    "cypress:web": "npx cypress open --browser chromium",
-    "cypress:headless": "npx cypress run --browser chromium"
+    "cypress:web": "npx cypress open --browser chrome",
+    "cypress:headless": "npx cypress run --browser chrome"
   },
   "keywords": [],
   "author": "",

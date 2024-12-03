@@ -1,0 +1,26 @@
+{
+  "validRegistration": {
+    "title": "Mr",
+    "name": "Udesc",
+    "email": "udesc@exemplo.com",
+    "password": "SenhaSegura123",
+    "dobDay": "20",
+    "dobMonth": "August",
+    "dobYear": "1990",
+    "firstName": "Udesc",
+    "lastName": "Ceavi",
+    "company": "Udesc",
+    "address": "Rua das Flores",
+    "address2": "123",
+    "country": "United States",
+    "city": "São Paulo",
+    "state": "SP",
+    "zipcode": "01000-000",
+    "mobileNumber": "11999998888"
+  },
+  "duplicateEmailRegistration": {
+    "name": "Udesc",
+    "email": "udesc@exemplo.com",
+    "password": "SenhaSegura123"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "loginCredentials": {
+    "validLogin": {
+      "email": "udesc@exemplo.com",
+      "password": "SenhaSegura123",
+      "name": "Udesc"
+    },
+    "invalidLogin": {
+      "email": "udesc@exemplp.com",
+      "password": "SenhaIncorreta"
+    }
+  }
+}

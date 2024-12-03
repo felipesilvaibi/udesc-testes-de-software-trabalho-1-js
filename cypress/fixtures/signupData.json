@@ -1,5 +1,5 @@
 {
-  "validRegistration": {
+  "validSignupData": {
     "title": "Mr",
     "name": "Udesc",
     "email": "udesc@exemplo.com",
@@ -18,7 +18,7 @@
     "zipcode": "01000-000",
     "mobileNumber": "11999998888"
   },
-  "duplicateEmailRegistration": {
+  "duplicateEmailSignupData": {
     "name": "Udesc",
     "email": "udesc@exemplo.com",
     "password": "SenhaSegura123"

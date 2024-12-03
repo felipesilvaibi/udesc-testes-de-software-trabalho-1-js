@@ -1,6 +1,6 @@
 // cypress/support/commands.js
 
-Cypress.Commands.add('register', (userData) => {
+Cypress.Commands.add('signup', (userData) => {
   cy.visit('/');
   cy.get('#header').contains('Signup / Login').click();
   cy.get('[data-qa="signup-name"]').type(userData.name);

@@ -1,8 +1,8 @@
-// cypress/support/page_objects/RegisterPage.js
+// cypress/support/page_objects/SignupPage.js
 
 import BasePage from './BasePage';
 
-class RegisterPage extends BasePage {
+class SignupPage extends BasePage {
   // Elementos
   get signUpName() { return cy.get('[data-qa="signup-name"]'); }
   get signUpEmail() { return cy.get('[data-qa="signup-email"]'); }
@@ -76,4 +76,4 @@ class RegisterPage extends BasePage {
   }
 }
 
-export default RegisterPage;
+export default SignupPage;

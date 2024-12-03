@@ -6,17 +6,17 @@ const loginPage = new LoginPage();
 
 describe('RT002 - Login de Usuário', function () {
   let loginData;
-  let registerData;
+  let signupData;
 
   before(function () {
-    cy.fixture('registerData').then((registerDataFixture) => {
-      registerData = registerDataFixture;
+    cy.fixture('signupData').then((signupDataFixture) => {
+      signupData = signupDataFixture;
       cy.fixture('loginData').then((loginDataFixture) => {
         loginData = loginDataFixture;
 
-        const registrationInput = registerData.validRegistration;
+        const registrationInput = signupData.validSignupData;
 
-        cy.register(registrationInput);
+        cy.signup(registrationInput);
 
         cy.get('[data-qa="continue-button"]').click();
         cy.logout();

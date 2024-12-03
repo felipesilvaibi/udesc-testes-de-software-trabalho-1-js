@@ -1,16 +1,16 @@
 // cypress/e2e/user_signup.cy.js
 
-import RegisterPage from '../support/page_objects/RegisterPage';
+import SignupPage from '../support/page_objects/SignupPage';
 
-const registerPage = new RegisterPage();
+const signupPage = new SignupPage();
 
 describe('RT001 - Registro de Novo Usuário', function () {
-  let registerData;
+  let signupData;
   let loginData;
 
   before(function () {
-    cy.fixture('registerData').then((data) => {
-      registerData = data;
+    cy.fixture('signupData').then((data) => {
+      signupData = data;
     });
     cy.fixture('loginData').then((data) => {
       loginData = data;
@@ -21,7 +21,7 @@ describe('RT001 - Registro de Novo Usuário', function () {
     let input;
 
     before(function () {
-      input = registerData.validRegistration;
+      input = signupData.validSignupData;
     });
 
     it('Acessar o site https://automationexercise.com/', function () {
@@ -29,36 +29,36 @@ describe('RT001 - Registro de Novo Usuário', function () {
     });
 
     it('Clicar no botão "Signup / Login"', function () {
-      registerPage.navigateToSignupLogin();
+      signupPage.navigateToSignupLogin();
     });
 
     it('Na seção "New User Signup!", preencher o campo "Name" com o nome do usuário', function () {
-      registerPage.typeSignUpName(input.name);
+      signupPage.typeSignUpName(input.name);
     });
 
     it('Preencher o campo "Email Address" com o email do usuário', function () {
-      registerPage.typeSignUpEmail(input.email);
+      signupPage.typeSignUpEmail(input.email);
     });
 
     it('Clicar no botão "Signup"', function () {
-      registerPage.clickSignupButton();
+      signupPage.clickSignupButton();
     });
 
     it('Preencher todos os campos obrigatórios no formulário de registro.', function () {
-      registerPage.fillRegistrationForm(input);
+      signupPage.fillRegistrationForm(input);
     });
 
     it('Clicar no botão "Create Account"', function () {
-      registerPage.clickCreateAccountButton();
+      signupPage.clickCreateAccountButton();
     });
 
     it('Verificar se a conta foi criada com sucesso.', function () {
-      registerPage.verifyAccountCreated();
+      signupPage.verifyAccountCreated();
     });
 
     after('Deslogar a conta', function () {
-      registerPage.clickContinueButton();
-      registerPage.logout();
+      signupPage.clickContinueButton();
+      signupPage.logout();
     });
   });
 
@@ -66,7 +66,7 @@ describe('RT001 - Registro de Novo Usuário', function () {
     let input;
 
     before(function () {
-      input = registerData.duplicateEmailRegistration;
+      input = signupData.duplicateEmailSignupData;
     });
 
     it('Acessar o site https://automationexercise.com/', function () {
@@ -74,23 +74,23 @@ describe('RT001 - Registro de Novo Usuário', function () {
     });
 
     it('Clicar no botão "Signup / Login"', function () {
-      registerPage.navigateToSignupLogin();
+      signupPage.navigateToSignupLogin();
     });
 
     it('Na seção "New User Signup!", preencher o campo "Name" com o nome do usuário', function () {
-      registerPage.typeSignUpName(input.name);
+      signupPage.typeSignUpName(input.name);
     });
 
     it('Preencher o campo "Email Address" com o email do usuário', function () {
-      registerPage.typeSignUpEmail(input.email);
+      signupPage.typeSignUpEmail(input.email);
     });
 
     it('Clicar no botão "Signup"', function () {
-      registerPage.clickSignupButton();
+      signupPage.clickSignupButton();
     });
 
     it('Verificar se o sistema exibe a mensagem de erro: "Email Address already exist!"', function () {
-      registerPage.verifyEmailAlreadyExists();
+      signupPage.verifyEmailAlreadyExists();
     });
   });
 
@@ -98,6 +98,6 @@ describe('RT001 - Registro de Novo Usuário', function () {
     const loginCredentials = loginData.loginCredentials.validLogin;
 
     cy.login(loginCredentials.email, loginCredentials.password);
-    registerPage.deleteAccount();
+    signupPage.deleteAccount();
   });  
 });

@@ -1,0 +1,13 @@
+{
+  "addToCart": {
+    "oneBlueTop": {
+      "product": "Blue Top",
+      "confirmationMessage": "Your product has been added to cart."
+    },
+    "twoBlueTop": {
+      "product": "Blue Top",
+      "quantity": 2,
+      "confirmationMessage": "Your product has been added to cart."
+    }
+  }
+}

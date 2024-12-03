@@ -5,12 +5,12 @@ import BaseForm from './BaseForm';
 class CartForm extends BaseForm {
   // Elementos
   get cartItems() { return cy.get('#cart_info_table tbody tr'); }
-  get productName() { return cy.get('.cart_description h4 a'); }
-  get productQuantity() { return cy.get('.cart_quantity button.disabled'); }
+  get proceedToCheckoutButton() { return cy.contains('a.btn.btn-default.check_out', 'Proceed To Checkout'); }
+  get emptyCartMessage() { return cy.get('#empty_cart p'); }
 
   // Métodos
   verifyProductInCart(productNameToVerify, quantity = 1) {
-    this.cartItems.each(($el) => {
+    cy.get('#cart_info_table tbody tr').each(($el) => {
       cy.wrap($el).within(() => {
         cy.get('.cart_description h4 a').then(($name) => {
           if ($name.text().trim() === productNameToVerify) {
@@ -18,13 +18,24 @@ class CartForm extends BaseForm {
           }
         });
       });
+    }).then(() => {
+      cy.get('#cart_info_table tbody tr .cart_description h4 a')
+        .should('contain.text', productNameToVerify);
     });
   }
 
   verifyProductNotInCart(productNameToVerify) {
-    cy.get('#cart_info_table tbody tr').within(() => {
-      cy.contains('.cart_description h4 a', productNameToVerify).should('not.exist');
-    });
+    cy.get('#cart_info_table tbody tr .cart_description h4 a')
+      .should('not.contain.text', productNameToVerify);
+  }
+
+  proceedToCheckout() {
+    this.proceedToCheckoutButton.should('be.visible').click();
+  }
+
+  isCartEmpty() {
+    this.emptyCartMessage.should('be.visible')
+      .and('contain.text', 'Cart is empty!');
   }
 }
 

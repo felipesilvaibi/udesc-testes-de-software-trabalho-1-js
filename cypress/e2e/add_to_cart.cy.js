@@ -19,8 +19,8 @@ describe('RT004 - Adicionar Produto ao Carrinho', function () {
 
   describe('CT007 - Adicionar produto disponível ao carrinho', function () {
     before(function () {
-        cy.clearCookies();
-        cy.clearLocalStorage();
+      cy.clearCookies();
+      cy.clearLocalStorage();
     });
 
     it('Acessar o site https://automationexercise.com/', function () {
@@ -33,13 +33,7 @@ describe('RT004 - Adicionar Produto ao Carrinho', function () {
 
     it('Selecionar o produto "Blue Top" e navegar para a página de detalhes.', function () {
       const productName = addToCartData.oneBlueTop.product;
-
-      cy.contains('.productinfo.text-center p', productName)
-        .should('be.visible')
-        .closest('.col-sm-4')
-        .within(() => {
-          cy.contains('.choose a', 'View Product').should('be.visible').click();
-        });
+      productForm.navigateToProductDetails(productName);
     });
 
     it('Adicionar o produto ao carrinho.', function () {
@@ -58,12 +52,12 @@ describe('RT004 - Adicionar Produto ao Carrinho', function () {
 
   describe('CT008 - Adicionar múltiplas unidades de um produto', function () {
     before(function () {
-        cy.clearCookies();
-        cy.clearLocalStorage();
+      cy.clearCookies();
+      cy.clearLocalStorage();
     });
 
     it('Acessar o site https://automationexercise.com/', function () {
-      cy.visit('/');
+      cy.visit('/', { cacheBust: true });
     });
 
     it('Navegar até a página "Products".', function () {
@@ -72,12 +66,7 @@ describe('RT004 - Adicionar Produto ao Carrinho', function () {
 
     it('Selecionar o produto "Blue Top" e navegar para a página de detalhes.', function () {
       const productName = addToCartData.twoBlueTop.product;
-      cy.contains('.productinfo.text-center p', productName)
-        .should('be.visible')
-        .closest('.col-sm-4')
-        .within(() => {
-          cy.contains('.choose a', 'View Product').should('be.visible').click();
-        });
+      productForm.navigateToProductDetails(productName);
     });
 
     it('Especificar a quantidade como 2.', function () {
@@ -98,6 +87,5 @@ describe('RT004 - Adicionar Produto ao Carrinho', function () {
       const quantity = addToCartData.twoBlueTop.quantity;
       cartForm.verifyProductInCart(productName, quantity);
     });
-
   });
 });

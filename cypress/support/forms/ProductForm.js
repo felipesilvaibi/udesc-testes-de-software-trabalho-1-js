@@ -8,8 +8,18 @@ class ProductForm extends BaseForm {
   get confirmationModal() { return cy.get('#cartModal'); }
   get viewCartLink() { return this.confirmationModal.find('a').contains('View Cart'); }
   get confirmationMessage() { return this.confirmationModal.find('.modal-body p').first(); }
+  get quantityInput() { return cy.get('input#quantity'); }
 
   // Métodos
+  navigateToProductDetails(productName) {
+    cy.contains('.productinfo.text-center p', productName)
+      .should('be.visible')
+      .closest('.col-sm-4')
+      .within(() => {
+        cy.contains('.choose a', 'View Product').should('be.visible').click();
+      });
+  }
+
   addToCart() {
     this.addToCartButton.should('be.visible').click();
   }
@@ -21,8 +31,8 @@ class ProductForm extends BaseForm {
   }
 
   specifyQuantity(quantity) {
-    cy.get('input#quantity').should('be.visible').clear().type(quantity.toString());
-  }  
+    this.quantityInput.should('be.visible').clear().type(quantity.toString());
+  }
 }
 
 export default ProductForm;

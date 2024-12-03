@@ -1,13 +1,13 @@
-// cypress/support/page_objects/BasePage.js
+// cypress/support/forms/BaseForm.js
 
-class BasePage {
+class BaseForm {
   // Elementos    
   get header() { return cy.get('#header'); }
   get logoutUrl() { return this.header.contains('Logout'); }
   get deleteAccountUrl() { return this.header.contains('Delete Account'); }
   get continueButton() { return cy.get('[data-qa="continue-button"]'); }
   
-// Métodos
+  // Métodos
   logout() {
     this.logoutUrl.should('be.visible').click();
   }
@@ -25,4 +25,4 @@ class BasePage {
   }
 }
 
-export default BasePage;
+export default BaseForm;

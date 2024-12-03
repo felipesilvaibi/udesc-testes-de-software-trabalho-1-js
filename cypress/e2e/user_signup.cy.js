@@ -1,8 +1,8 @@
 // cypress/e2e/user_signup.cy.js
 
-import SignupPage from '../support/page_objects/SignupPage';
+import SignupForm from '../support/forms/SignupForm';
 
-const signupPage = new SignupPage();
+const signupForm = new SignupForm();
 
 describe('RT001 - Registro de Novo Usuário', function () {
   let signupData;
@@ -29,36 +29,36 @@ describe('RT001 - Registro de Novo Usuário', function () {
     });
 
     it('Clicar no botão "Signup / Login"', function () {
-      signupPage.navigateToSignupLogin();
+      signupForm.navigateToSignupLogin();
     });
 
     it('Na seção "New User Signup!", preencher o campo "Name" com o nome do usuário', function () {
-      signupPage.typeSignUpName(input.name);
+      signupForm.typeSignUpName(input.name);
     });
 
     it('Preencher o campo "Email Address" com o email do usuário', function () {
-      signupPage.typeSignUpEmail(input.email);
+      signupForm.typeSignUpEmail(input.email);
     });
 
     it('Clicar no botão "Signup"', function () {
-      signupPage.clickSignupButton();
+      signupForm.clickSignupButton();
     });
 
     it('Preencher todos os campos obrigatórios no formulário de registro.', function () {
-      signupPage.fillRegistrationForm(input);
+      signupForm.fillRegistrationForm(input);
     });
 
     it('Clicar no botão "Create Account"', function () {
-      signupPage.clickCreateAccountButton();
+      signupForm.clickCreateAccountButton();
     });
 
     it('Verificar se a conta foi criada com sucesso.', function () {
-      signupPage.verifyAccountCreated();
+      signupForm.verifyAccountCreated();
     });
 
     after('Deslogar a conta', function () {
-      signupPage.clickContinueButton();
-      signupPage.logout();
+      signupForm.clickContinueButton();
+      signupForm.logout();
     });
   });
 
@@ -74,23 +74,23 @@ describe('RT001 - Registro de Novo Usuário', function () {
     });
 
     it('Clicar no botão "Signup / Login"', function () {
-      signupPage.navigateToSignupLogin();
+      signupForm.navigateToSignupLogin();
     });
 
     it('Na seção "New User Signup!", preencher o campo "Name" com o nome do usuário', function () {
-      signupPage.typeSignUpName(input.name);
+      signupForm.typeSignUpName(input.name);
     });
 
     it('Preencher o campo "Email Address" com o email do usuário', function () {
-      signupPage.typeSignUpEmail(input.email);
+      signupForm.typeSignUpEmail(input.email);
     });
 
     it('Clicar no botão "Signup"', function () {
-      signupPage.clickSignupButton();
+      signupForm.clickSignupButton();
     });
 
     it('Verificar se o sistema exibe a mensagem de erro: "Email Address already exist!"', function () {
-      signupPage.verifyEmailAlreadyExists();
+      signupForm.verifyEmailAlreadyExists();
     });
   });
 
@@ -98,6 +98,6 @@ describe('RT001 - Registro de Novo Usuário', function () {
     const loginCredentials = loginData.loginCredentials.validLogin;
 
     cy.login(loginCredentials.email, loginCredentials.password);
-    signupPage.deleteAccount();
+    signupForm.deleteAccount();
   });  
 });

@@ -1,8 +1,8 @@
-// cypress/support/page_objects/LoginPage.js
+// cypress/support/forms/LoginForm.js
 
-import BasePage from './BasePage';
+import BaseForm from './BaseForm';
 
-class LoginPage extends BasePage {
+class LoginForm extends BaseForm {
   // Elementos
   get loginEmail() { return cy.get('[data-qa="login-email"]'); }
   get loginPassword() { return cy.get('[data-qa="login-password"]'); }
@@ -29,4 +29,4 @@ class LoginPage extends BasePage {
   }
 }
 
-export default LoginPage;
+export default LoginForm;

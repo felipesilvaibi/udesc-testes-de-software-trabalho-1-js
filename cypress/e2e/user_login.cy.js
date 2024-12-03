@@ -1,8 +1,8 @@
 // cypress/e2e/user_login.cy.js
 
-import LoginPage from '../support/page_objects/LoginPage';
+import LoginForm from '../support/forms/LoginForm';
 
-const loginPage = new LoginPage();
+const loginForm = new LoginForm();
 
 describe('RT002 - Login de Usuário', function () {
   let loginData;
@@ -36,27 +36,27 @@ describe('RT002 - Login de Usuário', function () {
     });
 
     it('Clicar no botão "Signup / Login"', function () {
-      loginPage.navigateToSignupLogin();
+      loginForm.navigateToSignupLogin();
     });
 
     it('Preencher o campo "Email Address" com o email do usuário', function () {
-      loginPage.loginEmail.type(input.email);
+      loginForm.loginEmail.type(input.email);
     });
 
     it('Preencher o campo "Password" com a senha do usuário', function () {
-      loginPage.loginPassword.type(input.password);
+      loginForm.loginPassword.type(input.password);
     });
 
     it('Clicar no botão "Login"', function () {
-      loginPage.loginButton.click();
+      loginForm.loginButton.click();
     });
 
     it('Verificar se o login foi efetuado com sucesso.', function () {
-      loginPage.verifyLoginCompleted();
+      loginForm.verifyLoginCompleted();
     });
 
     after(function () {
-      loginPage.logout();
+      loginForm.logout();
     });
   });
 
@@ -72,23 +72,23 @@ describe('RT002 - Login de Usuário', function () {
     });
 
     it('Clicar no botão "Signup / Login"', function () {
-      loginPage.navigateToSignupLogin();
+      loginForm.navigateToSignupLogin();
     });
 
     it('Preencher o campo "Email Address" com o email do usuário', function () {
-      loginPage.loginEmail.type(input.email);
+      loginForm.loginEmail.type(input.email);
     });
 
     it('Preencher o campo "Password" com a senha incorreta', function () {
-      loginPage.loginPassword.type(input.password);
+      loginForm.loginPassword.type(input.password);
     });
 
     it('Clicar no botão "Login"', function () {
-      loginPage.loginButton.click();
+      loginForm.loginButton.click();
     });
 
     it('Verificar se o sistema exibe a mensagem de erro: "Your email or password is incorrect!"', function () {
-      loginPage.verifyEmailOrPasswordIsIncorrect();
+      loginForm.verifyEmailOrPasswordIsIncorrect();
     });
   });
 

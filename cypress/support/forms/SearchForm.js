@@ -1,8 +1,8 @@
-// cypress/support/page_objects/SearchPage.js
+// cypress/support/forms/SearchForm.js
 
-import BasePage from './BasePage';
+import BaseForm from './BaseForm';
 
-class SearchPage extends BasePage {
+class SearchForm extends BaseForm {
   // Elementos
   get searchBar() { return cy.get('#search_product'); }
   get searchButton() { return cy.get('#submit_search'); }
@@ -26,4 +26,4 @@ class SearchPage extends BasePage {
   }
 }
 
-export default SearchPage;
+export default SearchForm;

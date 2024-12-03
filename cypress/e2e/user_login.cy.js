@@ -1,43 +1,33 @@
 // cypress/e2e/user_login.cy.js
 
-import RegisterForm from '../support/page_objects/RegisterForm'
+import LoginPage from '../support/page_objects/LoginPage';
 
-const registerForm = new RegisterForm()
+const loginPage = new LoginPage();
 
 describe('RT002 - Login de Usuário', function () {
   let loginData;
+  let registerData;
 
   before(function () {
-    // Carrega as fixtures antes de todos os testes
-    cy.fixture('registerData').then((registerData) => {
+    cy.fixture('registerData').then((registerDataFixture) => {
+      registerData = registerDataFixture;
       cy.fixture('loginData').then((loginDataFixture) => {
         loginData = loginDataFixture;
 
-        // Acessa os dados de registro válidos da fixture
         const registrationInput = registerData.validRegistration;
 
-        // Realiza o cadastro do usuário
-        cy.visit('/');
+        cy.register(registrationInput);
 
-        registerForm.navigateToSignupLogin();
-        registerForm.typeSignUpName(registrationInput.name);
-        registerForm.typeSignUpEmail(registrationInput.email);
-        registerForm.clickSignupButton();
-        registerForm.fillRegistrationForm(registrationInput);
-        registerForm.clickCreateAccountButton();
-        registerForm.verifyAccountCreated();
-        registerForm.navigation.continueButton().click();
-        registerForm.logout();
+        cy.get('[data-qa="continue-button"]').click();
+        cy.logout();
       });
     });
   });
 
-  // Teste CT003: Login com credenciais válidas
   describe('CT003 - Login com credenciais válidas', function () {
     let input;
 
     before(function () {
-      // Acessa os dados de login válidos da fixture
       input = loginData.loginCredentials.validLogin;
     });
 
@@ -46,37 +36,34 @@ describe('RT002 - Login de Usuário', function () {
     });
 
     it('Clicar no botão "Signup / Login"', function () {
-      registerForm.navigateToSignupLogin();
+      loginPage.navigateToSignupLogin();
     });
 
     it('Preencher o campo "Email Address" com o email do usuário', function () {
-      registerForm.login.loginEmail().type(input.email);
+      loginPage.loginEmail.type(input.email);
     });
 
     it('Preencher o campo "Password" com a senha do usuário', function () {
-      registerForm.login.loginPassword().type(input.password);
+      loginPage.loginPassword.type(input.password);
     });
 
     it('Clicar no botão "Login"', function () {
-      registerForm.login.loginButton().click();
+      loginPage.loginButton.click();
     });
 
     it('Verificar se o login foi efetuado com sucesso.', function () {
-      registerForm.verifyLoginCompleted();
+      loginPage.verifyLoginCompleted();
     });
 
     after(function () {
-      // Desloga o usuário
-      registerForm.logout();
+      loginPage.logout();
     });
   });
 
-  // Teste CT004: Login com senha incorreta
   describe('CT004 - Login com senha incorreta', function () {
     let input;
 
     before(function () {
-      // Acessa os dados de login inválidos da fixture
       input = loginData.loginCredentials.invalidLogin;
     });
 
@@ -85,33 +72,30 @@ describe('RT002 - Login de Usuário', function () {
     });
 
     it('Clicar no botão "Signup / Login"', function () {
-      registerForm.navigateToSignupLogin();
+      loginPage.navigateToSignupLogin();
     });
 
     it('Preencher o campo "Email Address" com o email do usuário', function () {
-      registerForm.login.loginEmail().type(input.email);
+      loginPage.loginEmail.type(input.email);
     });
 
     it('Preencher o campo "Password" com a senha incorreta', function () {
-      registerForm.login.loginPassword().type(input.password);
+      loginPage.loginPassword.type(input.password);
     });
 
     it('Clicar no botão "Login"', function () {
-      registerForm.login.loginButton().click();
+      loginPage.loginButton.click();
     });
 
     it('Verificar se o sistema exibe a mensagem de erro: "Your email or password is incorrect!"', function () {
-      registerForm.verifyEmailOrPasswordIsIncorrect();
+      loginPage.verifyEmailOrPasswordIsIncorrect();
     });
   });
 
   after(function() {
-    // Deleta a conta criada
     const input = loginData.loginCredentials.validLogin;
 
-    cy.visit('/');
-    registerForm.navigateToSignupLogin();
-    registerForm.loginUser(input.email, input.password);
-    registerForm.deleteAccount();
+    cy.login(input.email, input.password);
+    cy.deleteAccount();
   });
 });

@@ -1,15 +1,14 @@
 // cypress/e2e/user_signup.cy.js
 
-import RegisterForm from '../support/page_objects/RegisterForm'
+import RegisterPage from '../support/page_objects/RegisterPage';
 
-const registerForm = new RegisterForm()
+const registerPage = new RegisterPage();
 
 describe('RT001 - Registro de Novo Usuário', function () {
   let registerData;
   let loginData;
 
   before(function () {
-    // Carrega as fixtures antes de todos os testes
     cy.fixture('registerData').then((data) => {
       registerData = data;
     });
@@ -18,12 +17,10 @@ describe('RT001 - Registro de Novo Usuário', function () {
     });
   });
 
-  // Primeiro cenário: Registro com dados válidos
   describe('CT001 - Registro com dados válidos', function () {
     let input;
 
     before(function () {
-      // Acessa os dados de registro válidos da fixture
       input = registerData.validRegistration;
     });
 
@@ -32,46 +29,43 @@ describe('RT001 - Registro de Novo Usuário', function () {
     });
 
     it('Clicar no botão "Signup / Login"', function () {
-      registerForm.navigateToSignupLogin();
+      registerPage.navigateToSignupLogin();
     });
 
     it('Na seção "New User Signup!", preencher o campo "Name" com o nome do usuário', function () {
-      registerForm.typeSignUpName(input.name);
+      registerPage.typeSignUpName(input.name);
     });
 
     it('Preencher o campo "Email Address" com o email do usuário', function () {
-      registerForm.typeSignUpEmail(input.email);
+      registerPage.typeSignUpEmail(input.email);
     });
 
     it('Clicar no botão "Signup"', function () {
-      registerForm.clickSignupButton();
+      registerPage.clickSignupButton();
     });
 
     it('Preencher todos os campos obrigatórios no formulário de registro.', function () {
-      registerForm.fillRegistrationForm(input);
+      registerPage.fillRegistrationForm(input);
     });
 
     it('Clicar no botão "Create Account"', function () {
-      registerForm.clickCreateAccountButton();
+      registerPage.clickCreateAccountButton();
     });
 
     it('Verificar se a conta foi criada com sucesso.', function () {
-      registerForm.verifyAccountCreated();
+      registerPage.verifyAccountCreated();
     });
 
     after('Deslogar a conta', function () {
-      // Adicionar função logout corretamente
-      registerForm.navigation.continueButton().click();
-      registerForm.logout();
+      registerPage.clickContinueButton();
+      registerPage.logout();
     });
   });
 
-  // Segundo cenário: Registro com email já cadastrado
   describe('CT002 - Registro com email já cadastrado', function () {
     let input;
 
     before(function () {
-      // Acessa os dados de registro duplicado da fixture
       input = registerData.duplicateEmailRegistration;
     });
 
@@ -80,30 +74,30 @@ describe('RT001 - Registro de Novo Usuário', function () {
     });
 
     it('Clicar no botão "Signup / Login"', function () {
-      registerForm.navigateToSignupLogin();
+      registerPage.navigateToSignupLogin();
     });
 
     it('Na seção "New User Signup!", preencher o campo "Name" com o nome do usuário', function () {
-      registerForm.typeSignUpName(input.name);
+      registerPage.typeSignUpName(input.name);
     });
 
     it('Preencher o campo "Email Address" com o email do usuário', function () {
-      registerForm.typeSignUpEmail(input.email);
+      registerPage.typeSignUpEmail(input.email);
     });
 
     it('Clicar no botão "Signup"', function () {
-      registerForm.clickSignupButton();
+      registerPage.clickSignupButton();
     });
 
     it('Verificar se o sistema exibe a mensagem de erro: "Email Address already exist!"', function () {
-      registerForm.verifyEmailAlreadyExists();
+      registerPage.verifyEmailAlreadyExists();
     });
   });
 
   after('Deletar a conta criada', function () {
-      const loginCredentials = loginData.loginCredentials.validLogin;
+    const loginCredentials = loginData.loginCredentials.validLogin;
 
-      registerForm.loginUser(loginCredentials.email, loginCredentials.password);
-      registerForm.deleteAccount();
+    cy.login(loginCredentials.email, loginCredentials.password);
+    registerPage.deleteAccount();
   });  
 });
